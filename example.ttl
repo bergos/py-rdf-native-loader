@@ -1,0 +1,14 @@
+@prefix code: <https://code.described.at/> .
+@prefix ex: <http://example.org/> .
+
+<http://example.org/function> a ex:Factory;
+  code:implementedBy [ a code:EcmaScript ;
+    code:link <file:hello-world.js#entryPoint>
+  ], [ a code:Python ;
+    code:link <file:hello-world.py#entry_point>
+  ] .
+
+<http://example.org/literalFunction> a ex:Factory;
+  code:implementedBy
+    "() => console.log('Hello World Literal!')"^^code:EcmaScript ,
+    "lambda: lambda: print('Hello World from a literal!')"^^code:Python .

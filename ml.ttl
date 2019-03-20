@@ -1,0 +1,38 @@
+@base <http://example.org/> .
+@prefix code: <https://code.described.at/> .
+@prefix ml: <https://ns.bergnet.org/machine-learning/> .
+
+<project> a ml:Project;
+  ml:model [
+    code:implementedBy [ a code:Onnx ;
+      code:link <file:model.onnx>
+    ], [ a code:Python ;
+      code:link <file:model.py#create>
+    ]
+  ] ;
+  ml:interface [
+    ml:inputMapper [
+      code:implementedBy [ a code:Python ;
+        code:link <file:mapping.py#input_mapper>
+      ] ;
+      code:arguments ( <file:mapping.json> )
+    ] ;
+    ml:outputMapper [
+      code:implementedBy [ a code:Python ;
+        code:link <file:mapping.py#output_mapper>
+      ] ;
+      code:arguments ( <file:mapping.json> )
+    ] ;
+    ml:outputReverseMapper [
+      code:implementedBy [ a code:Python ;
+        code:link <file:mapping.py#output_reverse_mapper>
+      ] ;
+      code:arguments ( <file:mapping.json> )
+    ]
+  ] ;
+  ml:training [ a ml:Training;
+    ml:trainingDataset <http://example.org/training-data.ttl> ;
+    ml:validationDataset <http://example.org/validation-data.ttl> ;
+    ml:batchSize 1 ;
+    ml:epochs 3 ;
+  ] .
